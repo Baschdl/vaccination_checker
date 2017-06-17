@@ -6,11 +6,12 @@ from django.template import Context, loader
 
 
 def index(request):
-    template = loader.get_template('templates\\vaccination_checker\\test.html')
+    template = loader.get_template('vaccination_checker/test.html')
     return HttpResponse(template.render())
 
 def image_selector(request):
-    return HttpResponse("Please upload your images.")
+    template = loader.get_template('vaccination_checker/image_selector.html')
+    return HttpResponse(template.render())
 
 def summary(request):
     return HttpResponse("Here are your results.")
