@@ -17,6 +17,8 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^polls/', include('vaccination_checker.urls')),
+    url(r'^index/', include('vaccination_checker.urls')),
+    url(r'^image_selector/', include('vaccination_checker.urls')),
+    url(r'^summary/', include('vaccination_checker.urls')),
     url(r'^admin/', admin.site.urls),
 ]

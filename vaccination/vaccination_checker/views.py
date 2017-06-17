@@ -5,4 +5,10 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+    return HttpResponse("Hello, welcome to the Vaccination Checker.")
+
+def image_selector(request):
+    return HttpResponse("Please upload your images.")
+
+def summary(request):
+    return HttpResponse("Here are your results.")
