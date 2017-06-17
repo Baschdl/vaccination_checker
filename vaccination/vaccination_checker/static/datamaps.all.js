@@ -930,8 +930,8 @@
             }, {
                 "type": "MultiPolygon",
                 "properties": {
-                    "name": "Australia"
-                    "vaccs": "Routine vaccines, Hepatitis A, Hepatitis B, Japanese Encephalitis, Rabies, Yellow Fever"
+                    "name": "Australia",
+                    //"vaccs": "Routine vaccines, Hepatitis A, Hepatitis B, Japanese Encephalitis, Rabies, Yellow Fever"
                 },
                 "id": "AUS",
                 "arcs": [
