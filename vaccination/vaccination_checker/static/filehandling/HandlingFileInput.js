@@ -1,6 +1,5 @@
 if (window.File && window.FileReader && window.FormData) {
 	var $inputField = $('#file');
-	alert('Uploaded!');
 
 	$inputField.on('change', function (e) {
 		var file = e.target.files[0];
