@@ -14,4 +14,6 @@ def image_selector(request):
     return HttpResponse(template.render())
 
 def summary(request):
-    return HttpResponse("Here are your results.")
+    #ML Stuff
+    template = loader.get_template('vaccination_checker/summary.html')
+    return HttpResponse(template.render())
