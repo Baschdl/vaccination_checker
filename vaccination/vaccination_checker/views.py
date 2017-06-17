@@ -23,29 +23,12 @@ def image_selector(request):
     if request.method == "POST":
         print("Got file")
         base_html = request.POST['imageData']
-
-        #decoded = base64.b64decode(fileReader)
-
-        #file = open('image.png', 'w')
-        #file.write(decoded)
-
-        #im = Image.open(BytesIO(decoded))
-        #im.save('accept.jpg', 'JPEG')
-
         base = re.sub('^data:image/.+;base64,', '', base_html)
-        decoded = base64.b64decode(base)
-        #image_data_str = image_data.decode("utf-8")
-        image_data_str = str(decoded)
-        #image = Image.open(StringIO(base))
-        #image.save('accept.jpg', 'JPEG')
 
-        #image_output = StringIO()
-        #image_output.write(str(decoded))   # Write decoded image to buffer
-        #image_output.seek(0)
-
-        g = open("out.jpeg", "w")
-        g.write(image_data_str)
-        g.close()
+        imgdata123 = base64.b64decode(base)
+        filename = 'some_image.jpg'
+        with open(filename, 'wb') as f:
+            f.write(imgdata123)
 
         payload = {'success': True}
         return HttpResponse(json.dumps(payload), content_type='application/json')
