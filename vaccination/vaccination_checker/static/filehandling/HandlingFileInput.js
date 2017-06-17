@@ -19,6 +19,7 @@ if (window.File && window.FileReader && window.FormData) {
 function readFile(file) {
 	var reader = new FileReader();
 
+	//could resize photo here
 	reader.onloadend = function () {
 		processFile(reader.result, file.type);
 	}
@@ -28,8 +29,60 @@ function readFile(file) {
 	}
 
 	reader.readAsDataURL(file);
-	sendFile(reader)
 }
+
+
+//-----
+
+function processFile(dataURL, fileType) {
+	var maxWidth = 100;
+	var maxHeight = 100;
+
+	var image = new Image();
+	image.src = dataURL;
+
+	image.onload = function () {
+		var width = image.width;
+		var height = image.height;
+		var shouldResize = (width > maxWidth) || (height > maxHeight);
+
+		if (!shouldResize) {
+			sendFile(dataURL);
+			return;
+		}
+
+		var newWidth;
+		var newHeight;
+
+		if (width > height) {
+			newHeight = height * (maxWidth / width);
+			newWidth = maxWidth;
+		} else {
+			newWidth = width * (maxHeight / height);
+			newHeight = maxHeight;
+		}
+
+		var canvas = document.createElement('canvas');
+
+		canvas.width = newWidth;
+		canvas.height = newHeight;
+
+		var context = canvas.getContext('2d');
+
+		context.drawImage(this, 0, 0, newWidth, newHeight);
+
+		dataURL = canvas.toDataURL('image/jpeg');
+
+		sendFile(dataURL);
+	};
+
+	image.onerror = function () {
+		alert('There was an error processing your file!');
+	};
+}
+
+//------
+
 
 function sendFile(fileData) {
 	var formData = new FormData();
@@ -38,7 +91,7 @@ function sendFile(fileData) {
 
 	$.ajax({
 		type: 'POST',
-		url: '/your/upload/url',
+		url: '/vaccination_checker/image_selector/',
 		data: formData,
 		contentType: false,
 		processData: false,
