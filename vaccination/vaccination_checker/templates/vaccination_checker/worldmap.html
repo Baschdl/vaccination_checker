@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <!-- Theme Made By www.w3schools.com - No Copyright -->
-  <title>Bootstrap Theme Company Page</title>
+<title>Bootstrap Theme Company Page</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -189,6 +187,15 @@
     }
   }
   </style>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+    <script src="https://raw.githubusercontent.com/markmarkoh/datamaps/master/dist/datamaps.world.hires.min.js"></script>7
+    <script src="https://datamaps.github.io/scripts/d3.min.js"></script>
+    <script src="https://datamaps.github.io/scripts/topojson.js"></script>
+    <script src="https://datamaps.github.io/scripts/0.5.8/datamaps.all.js"></script>
+    <script type="text/javascript" src="https://use.typekit.net/vzv8gnr.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
@@ -209,83 +216,9 @@
     </div>
   </div>
 </nav>
-
-<!-- Container (About Section) -->
-<div id="about" class="container-fluid">
-  <div class="row">
-      <input id="file" type="file" accept="image/*">
-    {% load static %}
-    <script type="text/javascript" src="{% static "filehandling/HandlingFileInput.js" %}"></script>
-
-  </div>
-</div>
-
-<div class="container-fluid bg-grey">
-  <div class="row">
-    <div class="col-sm-4">
-      <span class="glyphicon glyphicon-globe logo slideanim"></span>
-    </div>
-    <div class="col-sm-8">
-        <p>
-          <a href="/vaccination_checker/summary" class="btn btn-default btn-lg" role="button">Begin Processing!</a>
-        </p>
-    </div>
-  </div>
-</div>
-
-
-<!--
-<footer class="container-fluid text-center">
-  <a href="#myPage" title="To Top">
-    <span class="glyphicon glyphicon-chevron-up"></span>
-  </a>
-  <p>Bootstrap Theme Made By <a href="https://www.w3schools.com" title="Visit w3schools">www.w3schools.com</a></p>
-</footer> ´
--->
-
+<div id="container" style="position: relative; width: 1300px; height: 760px;"></div>
 <script>
-$(document).ready(function(){
-  // Add smooth scrolling to all links in navbar + footer link
-  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
-    // Make sure this.hash has a value before overriding default behavior
-    if (this.hash !== "") {
-      // Prevent default anchor click behavior
-      event.preventDefault();
-
-      // Store hash
-      var hash = this.hash;
-
-      // Using jQuery's animate() method to add smooth page scroll
-      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top
-      }, 900, function(){
-
-        // Add hash (#) to URL when done scrolling (default click behavior)
-        window.location.hash = hash;
-      });
-    } // End if
-  });
-
-  $(window).scroll(function() {
-    $(".slideanim").each(function(){
-      var pos = $(this).offset().top;
-
-      var winTop = $(window).scrollTop();
-        if (pos < winTop + 600) {
-          $(this).addClass("slide");
-        }
-    });
-  });
-})
+    var map = new Datamap({element: document.getElementById('container')});
 </script>
-
 </body>
 </html>
-
-
-
-
-
-
-
