@@ -17,3 +17,7 @@ def summary(request):
     #ML Stuff
     template = loader.get_template('vaccination_checker/summary.html')
     return HttpResponse(template.render())
+
+def worldmap(request):
+    template = loader.get_template('vaccination_checker/worldmap.html')
+    return HttpResponse(template.render())
