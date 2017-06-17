@@ -31,17 +31,23 @@ def image_selector(request):
         base = re.sub('^data:image/.+;base64,', '', base_html)
 
         imgdata123 = base64.b64decode(base)
-        filename = 'some_image.jpg'
+        filename = 'vaccination_checker/static/some_image.jpg'
         with open(filename, 'wb') as f:
             f.write(imgdata123)
         analyze(filename)
         payload = {'success': True}
         #return HttpResponse(json.dumps(payload), content_type='application/json')
         template = loader.get_template('vaccination_checker/image_selector.html')
-        return HttpResponse(template.render())
+        context = {
+            'imagedirectory': 'some_image.jpg'
+        }
+        return HttpResponse(template.render(context))
     else:
         template = loader.get_template('vaccination_checker/image_selector.html')
-        return HttpResponse(template.render())
+        context = {
+            'imagedirectory': 'some_image.jpg'
+        }
+        return HttpResponse(template.render(context))
 
 def summary(request):
     #ML Stuff
