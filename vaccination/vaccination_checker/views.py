@@ -31,7 +31,9 @@ def image_selector(request):
             f.write(imgdata123)
 
         payload = {'success': True}
-        return HttpResponse(json.dumps(payload), content_type='application/json')
+        #return HttpResponse(json.dumps(payload), content_type='application/json')
+        template = loader.get_template('vaccination_checker/image_selector.html')
+        return HttpResponse(template.render())
     else:
         template = loader.get_template('vaccination_checker/image_selector.html')
         return HttpResponse(template.render())
