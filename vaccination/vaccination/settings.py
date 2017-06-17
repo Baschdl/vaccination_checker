@@ -25,7 +25,7 @@ SECRET_KEY = '8^-q1gxx$$5#%eaeirdpac&_8kc^c=^i#zh#w4hc!v@hcx=0_t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ec2-13-58-26-225.us-east-2.compute.amazonaws.com','13.58.26.225']
+ALLOWED_HOSTS = ['ec2-13-58-26-225.us-east-2.compute.amazonaws.com','13.58.26.225','127.0.0.1']
 
 
 # Application definition
@@ -125,5 +125,5 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(BASE_DIR, 'vaccination_checker/static/')
+    os.path.join(BASE_DIR, 'vaccination_checker/static/'),
 )

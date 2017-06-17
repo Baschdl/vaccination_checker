@@ -6,7 +6,7 @@ from django.template import Context, loader
 
 
 def index(request):
-    template = loader.get_template('vaccination_checker/test.html')
+    template = loader.get_template('vaccination_checker/complete.html')
     return HttpResponse(template.render())
 
 def image_selector(request):
