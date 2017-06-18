@@ -220,27 +220,19 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Vaccination Name</th>
-        <th>Occurences</th>
-        <th>Additional Information</th>
-        <th>Disease</th>
+        <th>Vaccine</th>
+        <th>Your Shots</th>
+        <th>Needed Shots</th>
       </tr>
     </thead>
     <tbody>
-        <!--
-        {% for vaccine in api.all %}
-        <tr>
-          {% for vaccine in api.all %}
-            <td>{{ choice.choice_text }}</td>
-          {% endfor %}
-        </tr>
-          {% endfor %}
-          -->
+    {% for x in row %}
       <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
+        {% for i in x %}
+          <td>{{i}}</td>
+        {% endfor %}
       </tr>
+      {% endfor %}
     </tbody>
   </table>
 </div>
