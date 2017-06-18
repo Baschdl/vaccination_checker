@@ -5,6 +5,8 @@ import numpy as np
 from base64 import b64encode
 import json
 import requests
+import datetime
+import time
 
 #from PIL import Image
 from io import BytesIO, StringIO
@@ -17,6 +19,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.template import Context, loader
 from django.core.files.storage import FileSystemStorage
+
+from os import listdir
+from os.path import isfile, join
 
 
 def index(request):
@@ -31,21 +36,33 @@ def image_selector(request):
         base = re.sub('^data:image/.+;base64,', '', base_html)
 
         imgdata123 = base64.b64decode(base)
-        filename = 'vaccination_checker/static/some_image.jpg'
+        filename = 'vaccination_checker/static/images/'+datetime.datetime.fromtimestamp(time.time()).\
+            strftime('%Y-%m-%d-%H-%M-%S')+'.jpg'
         with open(filename, 'wb') as f:
             f.write(imgdata123)
         analyze(filename)
         #payload = {'success': True}
         #return HttpResponse(json.dumps(payload), content_type='application/json')
+
+        onlyfiles = [f for f in listdir('vaccination_checker/static/images/') if isfile(join('vaccination_checker/static/images/', f))]
+        files = []
+        for file in onlyfiles:
+            files.append('/images/' + file)
         template = loader.get_template('vaccination_checker/image_selector.html')
         context = {
-            'imagedirectory': 'some_image.jpg'
+            'imagedirectory': files
         }
         return HttpResponse(template.render(context))
     else:
+        onlyfiles = [f for f in listdir('vaccination_checker/static/images/') if isfile(join('vaccination_checker/static/images/', f))]
+        files = []
+        for file in onlyfiles:
+            print(file)
+            print('vaccination_checker/media/images/' + file)
+            files.append('/images/' + file)
         template = loader.get_template('vaccination_checker/image_selector.html')
         context = {
-            'imagedirectory': 'some_image.jpg'
+            'imagedirectory': files
         }
         return HttpResponse(template.render(context))
 
