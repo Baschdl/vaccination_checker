@@ -99,8 +99,7 @@ def summary(request):
     print(filename)
     out = analyze(filename)
     info = vaccinationData[vaccinationData['Vaccination Name'].isin(out.keys())]
-    a = [(vac,vaccinationData[vaccinationData['Vaccination Name'] == vac]['Amount of Shots (adults)'].iloc[0],out[vac]) for vac in out.keys()]
-    print(a)
+    a = [(vac, vaccinationData[vaccinationData['Vaccination Name'] == vac]['Disease'].iloc[0], vaccinationData[vaccinationData['Vaccination Name'] == vac]['Amount of Shots (adults)'].iloc[0], out[vac], vaccinationData[vaccinationData['Vaccination Name'] == vac]['Output Information'].iloc[0]) for vac in out.keys()]
     #print(list(info.iterrows()))
     context = {
         'row': a
