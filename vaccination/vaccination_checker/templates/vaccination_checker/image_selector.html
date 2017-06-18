@@ -213,42 +213,40 @@
 <!-- Container (About Section) -->
 <div id="about" class="container-fluid">
   <div class="row">
-      <input id="file" type="file" accept="image/*">
+  <div class="col-md-12">
     {% load static %}
-    <script type="text/javascript" src="{% static "filehandling/HandlingFileInput.js" %}"></script>
-
     <!--<img src={% static "{{ imagedirectory }}" %}" alt="Mountain View" style="width:304px;height:228px;">-->
       {% for i in imagedirectory %}
-          <img src="/static/{{ i }}" alt="Mountain View" style="width:304px;height:228px;">
+          <img src="/static/{{ i }}" alt="Vaccination Pass Photo" style="width:304px;height:228px;">    
       {% endfor %}
-    <button onclick="location.reload();">
-            Refresh
-    </button>
+    </div>
   </div>
 </div>
 
 <div class="container-fluid bg-grey">
   <div class="row">
-    <div class="col-sm-4">
-      <span class="glyphicon glyphicon-globe logo slideanim"></span>
-    </div>
     <div class="col-sm-8">
         <p>
-          <a href="/vaccination_checker/summary" class="btn btn-default btn-lg" role="button">Begin Processing!</a>
+          <input id="file" type="file" accept="image/*">{% load static %}
+          <script type="text/javascript" src="{% static "filehandling/HandlingFileInput.js" %}"></script>
+          <a href="/vaccination_checker/summary" class="btn btn-default btn-lg" role="button">Begin Processing</a>
+          <a href="/vaccination_checker/image_selector" class="btn btn-default btn-lg" role="button">Refresh</a>
         </p>
+
     </div>
   </div>
 </div>
 
 
-<!--
+<div>
 <footer class="container-fluid text-center">
   <a href="#myPage" title="To Top">
     <span class="glyphicon glyphicon-chevron-up"></span>
   </a>
-  <p>Bootstrap Theme Made By <a href="https://www.w3schools.com" title="Visit w3schools">www.w3schools.com</a></p>
-</footer> ´
--->
+  <p>Data Provided By <a href="https://wwwnc.cdc.gov/travel" title="Centers for Disease Control and Prevention"> Centers for Disease Control and Prevention </a></p>
+</footer> 
+</div>
+
 
 <script>
 $(document).ready(function(){

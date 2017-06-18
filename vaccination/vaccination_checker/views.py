@@ -98,9 +98,11 @@ def summary(request):
     print(filename)
     out = analyze(filename)
     info = vaccinationData[vaccinationData['Vaccination Name'].isin(out.keys())]
-    print(info)
+    a = [(vac,vaccinationData[vaccinationData['Vaccination Name'] == vac]['Amount of Shots (adults)'].iloc[0],out[vac]) for vac in out.keys()]
+    print(a)
+    #print(list(info.iterrows()))
     context = {
-        'information': str(info)
+        'row': a
     }
     return HttpResponse(template.render(context))
 
