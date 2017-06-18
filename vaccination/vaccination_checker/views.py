@@ -7,6 +7,7 @@ import json
 import requests
 import datetime
 import time
+import random
 
 #from PIL import Image
 from io import BytesIO, StringIO
@@ -99,7 +100,37 @@ def summary(request):
     print(filename)
     out = analyze(filename)
     info = vaccinationData[vaccinationData['Vaccination Name'].isin(out.keys())]
+
+    time_to_renewal = []
+    message_doctor = []
+    if out.keys().__len__() == 1:
+        time_to_renewal = ['2 weeks']
+        message_doctor = ['<a href=\'iMessage://01763954068\' class="btn btn-default btn-lg" role="button">Make an appointment with your doc</a>']
+    elif out.keys().__len__() == 2:
+        time_to_renewal = ['3 years', '2 weeks']
+        message_doctor = ['','<a href=\'iMessage://01763954068\' class="btn btn-default btn-lg" role="button">Make an appointment with your doc</a>']
+    elif out.keys().__len__() == 3:
+        time_to_renewal = ['3 years', '2 weeks', '1 year']
+        message_doctor = ['','<a href=\'iMessage://01763954068\' class="btn btn-default btn-lg" role="button">Make an appointment with your doc</a>','']
+    elif out.keys().__len__() > 3:
+        time_to_renewal = ['3 years', '2 weeks', '1 year']
+        message_doctor = ['','<a href=\'iMessage://01763954068\' class="btn btn-default btn-lg" role="button">Make an appointment with your doc</a>','']
+        for i in range(0,out.keys().__len__()-3):
+            time_to_renewal.append(str(random.randint(2, 10)) + " years")
+            message_doctor.append('')
+
+
+
     a = [(vac, vaccinationData[vaccinationData['Vaccination Name'] == vac]['Disease'].iloc[0], vaccinationData[vaccinationData['Vaccination Name'] == vac]['Amount of Shots (adults)'].iloc[0], out[vac], vaccinationData[vaccinationData['Vaccination Name'] == vac]['Output Information'].iloc[0]) for vac in out.keys()]
+    i = 0
+    b = []
+    for element in a:
+        element = list(element)
+        element.append(time_to_renewal[i])
+        element.append(message_doctor[i])
+        b.append(element)
+        i+=1
+    a = b
     timestamp = time.strftime("%x, %H:%M:%S")
     #print(list(info.iterrows()))
     print(timestamp)
