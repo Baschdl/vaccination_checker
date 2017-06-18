@@ -218,7 +218,12 @@
     <script type="text/javascript" src="{% static "filehandling/HandlingFileInput.js" %}"></script>
 
     <!--<img src={% static "{{ imagedirectory }}" %}" alt="Mountain View" style="width:304px;height:228px;">-->
-    <img src="/static/{{ imagedirectory }}" alt="Mountain View" style="width:304px;height:228px;">
+      {% for i in imagedirectory %}
+          <img src="/static/{{ i }}" alt="Mountain View" style="width:304px;height:228px;">
+      {% endfor %}
+    <button onclick="location.reload();">
+            Refresh
+    </button>
   </div>
 </div>
 

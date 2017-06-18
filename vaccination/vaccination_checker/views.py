@@ -1,18 +1,27 @@
 import base64
-import json
-import pickle
-# from PIL import Image
-import re
-from base64 import b64encode
-
+import pandas as pd
 import cv2
 import numpy as np
-import pandas as pd
+from base64 import b64encode
+import json
 import requests
+import datetime
+import time
+
+#from PIL import Image
+from io import BytesIO, StringIO
+import re
+
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+
 # Create your views here.
 from django.http import HttpResponse
-from django.template import loader
-from django.views.decorators.csrf import csrf_exempt
+from django.template import Context, loader
+from django.core.files.storage import FileSystemStorage
+
+from os import listdir
+from os.path import isfile, join
 
 
 def index(request):
@@ -27,43 +36,47 @@ def image_selector(request):
         base = re.sub('^data:image/.+;base64,', '', base_html)
 
         imgdata123 = base64.b64decode(base)
-        filename = 'vaccination_checker/static/some_image.jpg'
+        filename = 'vaccination_checker/static/images/'+datetime.datetime.fromtimestamp(time.time()).\
+            strftime('%Y-%m-%d-%H-%M-%S')+'.jpg'
         with open(filename, 'wb') as f:
             f.write(imgdata123)
-
-        payload = {'success': True}
+        analyze(filename)
+        #payload = {'success': True}
         #return HttpResponse(json.dumps(payload), content_type='application/json')
+
+        onlyfiles = [f for f in listdir('vaccination_checker/static/images/') if isfile(join('vaccination_checker/static/images/', f))]
+        files = []
+        for file in onlyfiles:
+            files.append('/images/' + file)
         template = loader.get_template('vaccination_checker/image_selector.html')
         context = {
-            'imagedirectory': 'some_image.jpg'
+            'imagedirectory': files
         }
         return HttpResponse(template.render(context))
     else:
+        onlyfiles = [f for f in listdir('vaccination_checker/static/images/') if isfile(join('vaccination_checker/static/images/', f))]
+        files = []
+        for file in onlyfiles:
+            print(file)
+            print('vaccination_checker/media/images/' + file)
+            files.append('/images/' + file)
         template = loader.get_template('vaccination_checker/image_selector.html')
         context = {
-            'imagedirectory': 'some_image.jpg'
+            'imagedirectory': files
         }
         return HttpResponse(template.render(context))
 
 def summary(request):
     #ML Stuff
-
     template = loader.get_template('vaccination_checker/summary.html')
-    filename = 'vaccination_checker/static/some_image.jpg'
-    out = analyze(filename)
-    info = vaccinationData[vaccinationData['Vaccination Name'].isin(out.keys())]
-    print(info)
-    context = {
-        'information': str(info)
-    }
-    return HttpResponse(template.render(context))
+    return HttpResponse(template.render())
 
 def worldmap(request):
     template = loader.get_template('vaccination_checker/worldmap.html')
     return HttpResponse(template.render())
 
 ####### LARI UND FREYAS PRETTY FUNCTIONS #####
-vaccinationData = pickle.load(open('vaccination_checker/static/vaccinationInfo.p','rb'))
+
 ENDPOINT_URL = 'https://vision.googleapis.com/v1/images:annotate'
 RESULTS_DIR = 'jsons'
 API_KEY = 'AIzaSyCv-h5VNRepCR9dlXTMsLZ6gN0a-_FnWJM'
@@ -179,29 +192,6 @@ def cut_image(file):
     y1 = yS.min()
     return origin[y1:,x1:x2,:]
 
-from difflib import SequenceMatcher
-
-
-def similar(a, b):
-    return SequenceMatcher(None, a, b).ratio()
-
-def vaccinations_from_text(input_data):
-    our_vaccinations = {}
-    normalize = lambda x: ''.join((''.join(x.split(' '))).split('\n')).lower()
-    for read_info in input_data:
-        normalized_in = normalize(read_info)
-        print(normalized_in)
-        for vac in list(vaccinationData['Vaccination Name'].dropna().unique()):
-            normalized_vac = normalize(vac)
-            if similar(normalized_vac,normalized_in) > 0.9:
-                print(normalized_in + '|' + normalized_vac)
-            if similar(normalized_vac,normalized_in) > 0.9:
-                if vac in our_vaccinations.keys():
-                    our_vaccinations[vac] +=  1
-                else:
-                    our_vaccinations[vac] = 1
-    return our_vaccinations
-
 def analyze(file):
     img = cut_image(file)
     temp_file = 'temp.jpg'
@@ -215,9 +205,8 @@ def analyze(file):
             # save to JSON file
             imgname = image_filenames[idx]
             # print the plaintext to screen for convenience
-            text = [t['description'] for t in resp['textAnnotations']]
-            return vaccinations_from_text(text[:])
             for t in resp['textAnnotations']:
+                print(t['description'])
                 des = ''.join(''.join(t['description'].lower().split(' ')).split('\n'))
                 if 'cervarix' in des \
                         or 'menjugate' in des \
@@ -228,7 +217,6 @@ def analyze(file):
                     print("    Bounding Polygon:")
                     xs = []
                     ys = []
-
                     for d in t['boundingPoly']['vertices']:
                         xs += [d['x']]
                         ys += [d['y']]
@@ -237,5 +225,5 @@ def analyze(file):
                     print("    Text:")
                     print(t['description'])
                     cv2.rectangle(img, (xS.min(), yS.min()), (xS.max(), yS.max()), (0, 255, 0), thickness=3, lineType=8,
-                                                   shift=0)
-                    cv2.imwrite('aaaa.jpg', img)
+                                  shift=0)
+    cv2.imwrite('aaaa.jpg', img)

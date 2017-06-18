@@ -98,9 +98,10 @@ function sendFile(fileData) {
 		success: function (data) {
 			if (data.success) {
 				alert('Your file was successfully uploaded!');
-			} else {
-				alert('There was an error uploading your file!');
 			}
+			//else {
+			//	alert('There was an error uploading your file!');
+			//}
 		},
 		error: function (data) {
 			alert('There was an error uploading your file!');

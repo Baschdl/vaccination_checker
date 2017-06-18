@@ -43,7 +43,7 @@
         },
         popupOnHover: true,
         highlightOnHover: true,
-        highlightFillColor: '#FC8D59',
+        highlightFillColor: '#f4511e',
         highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
         highlightBorderWidth: 2,
         highlightBorderOpacity: 1
@@ -931,7 +931,7 @@
                 "type": "MultiPolygon",
                 "properties": {
                     "name": "Australia",
-                    //"vaccs": "Routine vaccines, Hepatitis A, Hepatitis B, Japanese Encephalitis, Rabies, Yellow Fever"
+                    "vaccs": "Routine vaccines, Hepatitis A, Hepatitis B, Japanese Encephalitis, Rabies, Yellow Fever"
                 },
                 "id": "AUS",
                 "arcs": [
@@ -2331,7 +2331,8 @@
             }, {
                 "type": "MultiPolygon",
                 "properties": {
-                    "name": "Russia"
+                    "name": "Russia",
+                    "vaccs": "Routine vaccines, Hepatitis A, Hepatitis B, Japanese Encephalitis, Rabies"
                 },
                 "id": "RUS",
                 "arcs": [
@@ -2685,7 +2686,8 @@
             }, {
                 "type": "MultiPolygon",
                 "properties": {
-                    "name": "United States of America - None"
+                    "name": "United States of America",
+                    "vaccs": "No vaccination required"
                 },
                 "id": "USA",
                 "arcs": [
