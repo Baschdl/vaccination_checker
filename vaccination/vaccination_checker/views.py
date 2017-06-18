@@ -98,9 +98,19 @@ def summary(request):
 
     template = loader.get_template('vaccination_checker/summary.html')
     filename = newest_file
-    print(filename)
-    out = analyze(filename)
+    # get all files
+    o = {}
+    for f in files:
+        out = analyze(f)
+        for key in out.keys():
+            if key in o.keys():
+                o[key] += out[key]
+            else:
+                o[key] = out[key]
     #info = vaccinationData[vaccinationData['Vaccination Name'].isin(out.keys())]
+    print(out)
+    print(files)
+    out = o
 
     time_to_renewal = []
     message_doctor = []
@@ -301,7 +311,7 @@ def analyze(file):
             imgname = image_filenames[idx]
             # print the plaintext to screen for convenience
             text = [t['description'] for t in resp['textAnnotations']]
-            return vaccinations_from_text(text[:])
+            return vaccinations_from_text(text[1:])
             for t in resp['textAnnotations']:
                 des = ''.join(''.join(t['description'].lower().split(' ')).split('\n'))
                 if 'cervarix' in des \
