@@ -26,7 +26,7 @@ import os
 
 
 def index(request):
-    template = loader.get_template('vaccination_checker/complete.html')
+    template = loader.get_template('vaccination_checker/main.html')
     return HttpResponse(template.render())
 
 @csrf_exempt
