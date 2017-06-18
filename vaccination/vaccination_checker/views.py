@@ -22,6 +22,7 @@ from django.core.files.storage import FileSystemStorage
 
 from os import listdir
 from os.path import isfile, join
+import os
 
 
 def index(request):
@@ -36,6 +37,10 @@ def image_selector(request):
         base = re.sub('^data:image/.+;base64,', '', base_html)
 
         imgdata123 = base64.b64decode(base)
+
+        if not(os.path.exists('vaccination_checker/static/images/')):
+                os.makedirs('vaccination_checker/static/images/')
+
         filename = 'vaccination_checker/static/images/'+datetime.datetime.fromtimestamp(time.time()).\
             strftime('%Y-%m-%d-%H-%M-%S')+'.jpg'
         with open(filename, 'wb') as f:
@@ -53,6 +58,9 @@ def image_selector(request):
         }
         return HttpResponse(template.render(context))
     else:
+        if not(os.path.exists('vaccination_checker/static/images/')):
+                os.makedirs('vaccination_checker/static/images/')
+
         onlyfiles = [f for f in listdir('vaccination_checker/static/images/') if isfile(join('vaccination_checker/static/images/', f))]
         files = []
         for file in onlyfiles:
@@ -74,6 +82,8 @@ import pickle
 def summary(request):
     #ML Stuff
 
+    if not(os.path.exists('vaccination_checker/static/images/')):
+                os.makedirs('vaccination_checker/static/images/')
     onlyfiles = [f for f in listdir('vaccination_checker/static/images/') if
                  isfile(join('vaccination_checker/static/images/', f))]
     files = []
