@@ -51,7 +51,8 @@ def image_selector(request):
         onlyfiles = [f for f in listdir('vaccination_checker/static/images/') if isfile(join('vaccination_checker/static/images/', f))]
         files = []
         for file in onlyfiles:
-            files.append('images/' + file)
+            if(file.capitalize() != 'Thumbs.db'.capitalize()):
+                files.append('images/' + file)
         template = loader.get_template('vaccination_checker/image_selector.html')
         context = {
             'imagedirectory': files
@@ -64,9 +65,8 @@ def image_selector(request):
         onlyfiles = [f for f in listdir('vaccination_checker/static/images/') if isfile(join('vaccination_checker/static/images/', f))]
         files = []
         for file in onlyfiles:
-            print(file)
-            print('vaccination_checker/media/images/' + file)
-            files.append('images/' + file)
+            if(file.capitalize() != 'Thumbs.db'.capitalize()):
+                files.append('images/' + file)
         template = loader.get_template('vaccination_checker/image_selector.html')
         context = {
             'imagedirectory': files
@@ -89,9 +89,10 @@ def summary(request):
     files = []
     newest_file = "vaccination_checker/static/images/1000-01-01-01-01-01.jpg"
     for file in onlyfiles:
-        files.append('vaccination_checker/static/images/' + file)
-        if file < newest_file:
-            newest_file = 'vaccination_checker/static/images/' + file
+            if(file.capitalize() != 'Thumbs.db'.capitalize()):
+                files.append('vaccination_checker/static/images/' + file)
+                if file < newest_file:
+                    newest_file = 'vaccination_checker/static/images/' + file
 
     template = loader.get_template('vaccination_checker/summary.html')
     filename = newest_file
