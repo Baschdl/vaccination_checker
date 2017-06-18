@@ -1075,7 +1075,8 @@
             }, {
                 "type": "Polygon",
                 "properties": {
-                    "name": "Brazil"
+                    "name": "Brazil",
+                    "vaccs": "Routine vaccines, Hepatitis A, Hepatitis B, Typhoid, Malaria, Rabies"
                 },
                 "id": "BRA",
                 "arcs": [
