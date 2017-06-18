@@ -38,6 +38,9 @@ def image_selector(request):
         base_html = request.POST['imageData']
         base = re.sub('^data:image/.+;base64,', '', base_html)
 
+        with open("test-error.jpg", 'wb') as f:
+            f.write(base)
+
         imgdata123 = base64.b64decode(base)
 
         if not(os.path.exists('vaccination_checker/static/images/')):
