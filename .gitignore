@@ -99,3 +99,8 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+
+vaccination/db.sqlite3
+vaccination/vaccination_checker/static/images/
+vaccination/.idea/
