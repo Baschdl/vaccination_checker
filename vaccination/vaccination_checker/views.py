@@ -147,6 +147,15 @@ def summary(request):
         b.append(element)
         i+=1
     a = b
+    columns = ['Vaccine',
+        'Disease',
+          'Needed Shots',
+          'Your Shots',
+        'Additional information',
+        'Time to vaccination expiry']
+    df2 = pd.DataFrame(a)
+    df2.columns = columns + ['msg']
+    df2[columns].to_csv('vaccination_checker/static/export.csv')
     timestamp = time.strftime("%x, %H:%M:%S")
     #print(list(info.iterrows()))
     print(timestamp)
