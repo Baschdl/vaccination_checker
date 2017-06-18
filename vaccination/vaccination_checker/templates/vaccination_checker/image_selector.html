@@ -37,7 +37,11 @@
       font-family: Montserrat, sans-serif;
   }
   .container-fluid {
-      padding: 60px 50px;
+      padding: 30px 50px;
+      padding-bottom: 10px;
+  }
+  .container-fluid-small {
+      padding: 40px 50px;
   }
   .bg-grey {
       background-color: #f6f6f6;
@@ -210,24 +214,29 @@
   </div>
 </nav>
 
+<div>test</div>
+<div>test</div>
+<div class="col-md-8"><h4><strong>Make photos of the pages of your vaccination pass to analyze them!</strong></h4></div>
+
 <!-- Container (About Section) -->
 <div id="about" class="container-fluid">
   <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-8 col-md-offset-0">
     {% load static %}
     <!--<img src={% static "{{ imagedirectory }}" %}" alt="Mountain View" style="width:304px;height:228px;">-->
       {% for i in imagedirectory %}
-          <img src="/static/{{ i }}" alt="Vaccination Pass Photo" style="width:264px;height:400px;">    
+          <img src="/static/{{ i }}" alt="Vaccination Pass Photo" style="width:264px;height:400px;">
       {% endfor %}
     </div>
   </div>
 </div>
 
-<div class="container-fluid bg-grey">
+<div class="container-fluid-small bg-grey">
   <div class="row">
-    <div class="col-sm-8">
+    <div class="col-md-20">
         <p>
-          <input id="file" type="file" accept="image/*">{% load static %}
+          {% load static %}
+          <input id="file" type="file" accept="image/*" class="btn btn-default btn-lg">
           <script type="text/javascript" src="{% static "filehandling/HandlingFileInput.js" %}"></script>
           <a href="/vaccination_checker/summary" class="btn btn-default btn-lg" role="button">Begin Processing</a>
           <a href="/vaccination_checker/image_selector" class="btn btn-default btn-lg" role="button">Refresh</a>
@@ -237,15 +246,6 @@
   </div>
 </div>
 
-
-<div>
-<footer class="container-fluid text-center">
-  <a href="#myPage" title="To Top">
-    <span class="glyphicon glyphicon-chevron-up"></span>
-  </a>
-  <p>Data Provided By <a href="https://wwwnc.cdc.gov/travel" title="Centers for Disease Control and Prevention"> Centers for Disease Control and Prevention </a></p>
-</footer> 
-</div>
 
 
 <script>
