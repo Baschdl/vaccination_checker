@@ -205,14 +205,14 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#about">Here is your Vaccine history!</a></li>
+        <li><a href="#table">Here is your Vaccine history!</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
 <!-- Container (About Section) -->
-<div class="container">
+<div id="table" class="container">
     <h2>Basic Table</h2>
     <h3> Your Vaccination Record: </h3>
     {{ date }}
@@ -245,7 +245,7 @@
 
 <div id="about" class="container-fluid">
   <h3> Most Common Vaccinations Around the World: </h3>
-  <p>Click the vaccinations you already have to gain a comparision between you and the world</p>
+  <p>Click the vaccinations you already have to gain a comparsion between you and the world</p>
   <div class="row">
     <div class="progress">
       <div id="prg1" onclick="myFunction1()" class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="0"

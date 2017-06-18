@@ -38,7 +38,7 @@
   }
   .container-fluid {
       padding: 60px 40px;
-      padding-bottom: 0px;
+      padding-bottom: 20px;
   }
   .bg-grey {
       background-color: #f6f6f6;
@@ -201,7 +201,6 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="">Logo</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
@@ -224,15 +223,16 @@
 <!-- Container (About Section) -->
 <div id="about" class="container-fluid">
   <div class="row">
+  <div class="col-sm-4">
+      <span class="glyphicon glyphicon-signal logo"></span>
+    </div>
     <div class="col-sm-8">
       <h2>About Vaccination Checker</h2><br>
       <h4>The Pfizer and SAP Vaccination Checker enables people all over the world to finally gather all their important vaccination information in one place. It provides a fine summary of all relevant points of your vaccination record. Vaccines have never been this easy.</h4><br>
-      <p>By uploading photos of your vaccination record, this machine-lerning driven, data-first and secure application offers a stable and accurate representation of your vaccination process.</p>
+      <p>By uploading photos of your vaccination record, this machine-lerning driven, data-first and secure application offers a stable and accurate representation of your vaccination process.</p><br>
 
     </div>
-    <div class="col-sm-4">
-      <span class="glyphicon glyphicon-signal logo"></span>
-    </div>
+    
   </div>
 </div>
 
@@ -241,8 +241,9 @@
   <div class="row">
     <div class="col-sm-8">
       <h2>Where do you wish to go?</h2><br>
-      <h4><strong>TRAVEL MAP: </strong>Get vaccination recommendations about your future dream destination</h4><br>
-      <p><a href="/vaccination_checker/worldmap" title="Worldmap"><strong>CHECK IT OUT</strong></a></p>
+      <h4><strong>THE TRAVEL MAP:  </strong>Get vaccination recommendations about your future dream destination</h4><br>
+      <!--<p><a href="/vaccination_checker/worldmap" title="Worldmap"><strong>Check it out</a></p>-->
+      <a href="/vaccination_checker/image_selector" class="btn btn-default btn-lg" role="button" style="padding-bottom: 10px">Plan Ahead!</a>
     </div>
     <div class="col-sm-4">
       <span class=" glyphicon glyphicon-plane logo slideanim"></span>
@@ -259,7 +260,7 @@
     <div class="col-sm-8">
       <h2>Our Values</h2><br>
       <h4><strong>MISSION:</strong> Our mission is to build awareness of the benefits of vaccines. We provide digital solutions for people to support their documentation.</h4><br>
-      <p><strong>VISION:</strong> Our vision is to come up with a simple, unobtrusive solution that shows how to collect and incorporate vaccination data and use its value throughout one's life.</p>
+      <p><strong>VISION:</strong> Our vision is to come up with a simple, unobtrusive solution that shows how to collect and incorporate vaccination data and use its value throughout one's life.</p><br>
     </div>
   </div>
 </div>
