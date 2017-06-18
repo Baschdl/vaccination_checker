@@ -8,6 +8,7 @@ import requests
 import datetime
 import time
 import random
+import numpy
 
 #from PIL import Image
 from io import BytesIO, StringIO
@@ -99,7 +100,7 @@ def summary(request):
     filename = newest_file
     print(filename)
     out = analyze(filename)
-    info = vaccinationData[vaccinationData['Vaccination Name'].isin(out.keys())]
+    #info = vaccinationData[vaccinationData['Vaccination Name'].isin(out.keys())]
 
     time_to_renewal = []
     message_doctor = []
@@ -128,6 +129,11 @@ def summary(request):
         element = list(element)
         element.append(time_to_renewal[i])
         element.append(message_doctor[i])
+        if not(isinstance(element[2], str )) and numpy.isnan(element[2]):
+            element[2] = "0 shots"
+        if not(isinstance(element[4], str )) and numpy.isnan(element[4]):
+            element[4] = ''
+
         b.append(element)
         i+=1
     a = b
